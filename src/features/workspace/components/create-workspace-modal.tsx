@@ -52,8 +52,6 @@ export const CreateWorkspaceModal = () => {
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <Input
-                      id="workspace-name" // Add an id
-                      name="workspaceName" // Add a name
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         disabled={isPending}
