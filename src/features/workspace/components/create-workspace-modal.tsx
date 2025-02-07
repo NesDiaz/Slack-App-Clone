@@ -1,6 +1,6 @@
-import { toast } from "sonner";
+// import { toast } from "sonner";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 import {
     Dialog,
@@ -16,7 +16,7 @@ import { useCreateWorkspaceModal } from "../../store/use-create-workspace-modal"
 import { useCreateWorkspace } from "../api/use-create-workspace";
 
 export const CreateWorkspaceModal = () => {
-    const router = useRouter();
+    // const router = useRouter();
     const [open, setOpen] = useCreateWorkspaceModal();
     const [name, setName] = useState("");
 
@@ -31,13 +31,15 @@ export const CreateWorkspaceModal = () => {
         e.preventDefault();
 
         mutate({ name }, {
-            onSuccess(id) {
-                toast.success("Workspace created");
-                router.push(`/workspace/${id}`);
-                handleClose(false);
-            },
-            onError(error) {
-                toast.error(error.message || "Failed to create workspace");
+            onSuccess(data) {
+            console.log(data);
+            // onSuccess(id) {
+                // toast.success("Workspace created");
+                // router.push(`/workspace/${id}`);
+                // handleClose(false);
+            // },
+            // onError(error) {
+            //     toast.error(error.message || "Failed to create workspace");
             },
         });
     };
