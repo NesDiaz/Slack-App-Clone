@@ -22,7 +22,7 @@ export const useCreateWorkspace = () => {
     const isPending = useMemo(() => status === "pending", [status]);
     const isSuccess = useMemo(() => status === "success", [status]);
     const isError = useMemo(() => status === "error", [status]);
-    const isSettled= useMemo(() => status === "settled", [status]);
+    const isSettled = useMemo(() => status === "settled", [status]);
 
     const mutation = useMutation(api.workspaces.create);
 
@@ -37,7 +37,6 @@ export const useCreateWorkspace = () => {
         return response;
     } catch (error) {
         options?.onError?.(error as Error);
-
         if (options?.throwError) {
         throw error;
         }

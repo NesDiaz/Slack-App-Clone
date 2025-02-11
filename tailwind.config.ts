@@ -5,7 +5,7 @@ export default {
 			"./public/index.html",
 			"./components/**/*.{js,ts,jsx,tsx}",
 			"./pages/**/*.{js,ts,jsx,tsx,mdx}",
-	
+			"./src/features/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
 	  extend: {
@@ -58,6 +58,5 @@ export default {
 		},
 	  },
 	},
-	plugins: [require("tailwindcss-animate")],
-  } satisfies Config;
-  
+	plugins: [`require("tailwindcss-animate")`],
+} satisfies Config;

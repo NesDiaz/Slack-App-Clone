@@ -1,37 +1,18 @@
 "use client";
 
+import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 const WorkspaceIdPage = () => {
     const workspaceId = useWorkspaceId();
-
-    console.log("Workspace ID:", workspaceId); // Debugging
+    const { data } = useGetWorkspace({ id: workspaceId });
 
     return (
         <div>
-            ID: {workspaceId || "No ID found"}
+            Data: {JSON.stringify(data)}
         </div>
     );
-};
+}
 
 export default WorkspaceIdPage;
-
-
-
-// interface WorkspaceIdPageProps {
-//     params: {
-//         workspaceId: string;
-//     };
-// };
-
-// const WorkspaceIdPage = ({ params }:  WorkspaceIdPageProps) => {
-//     return (
-//         <div>
-//             ID: {params.workspaceId}
-//         </div>
-//     );
-// };
-
-// export default WorkspaceIdPage;
-
 
