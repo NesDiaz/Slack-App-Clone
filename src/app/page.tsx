@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
+
 import { useRouter } from "next/navigation";
+
 
 import { UserButton } from "@/features/auth/components/user-button";
 
@@ -20,12 +22,14 @@ export default function Home() {
   useEffect(() => {
     if (isLoading) return;
   
-    if (workspaceId) {
-      router.replace(`/Workspace/${workspaceId}`);
+    if (workspaceId && typeof workspaceId === "string") {
+      router.replace(`/workspace/${workspaceId}`);
     } else if (!open) {
       setOpen(true);
+      console.log(workspaceId);
     }
   }, [workspaceId, isLoading, open, setOpen, router]);
+  
   
   return (
     <div>

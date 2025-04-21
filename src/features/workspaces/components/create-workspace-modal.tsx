@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 
 import {
@@ -15,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useCreateWorkspaceModal } from "../store/use-create-workspace-modal";
 import { useCreateWorkspace } from "../api/use-create-workspace";
 
+
 export const CreateWorkspaceModal = () => {
     const router = useRouter();
     const [open, setOpen] = useCreateWorkspaceModal();
@@ -23,7 +25,7 @@ export const CreateWorkspaceModal = () => {
     const { mutate, isPending } = useCreateWorkspace();
 
     const handleClose = (newOpen: boolean) => {
-        setOpen(newOpen);
+        setOpen(newOpen); 
         if (!newOpen) setName(""); 
     };
 
@@ -31,16 +33,19 @@ export const CreateWorkspaceModal = () => {
         e.preventDefault();
 
         mutate({ name }, {
-            onSuccess(id) {
-                toast.success("Workspace created");
-                router.push(`/workspace/${id}`);
-                handleClose(false);
-            },
-            onError(error) {
-                toast.error(error.message || "Failed to create workspace");
+            onSuccess: (workspaceId) => {
+                console.log("New workspace created with ID:", workspaceId);
+
+                if (workspaceId && typeof workspaceId === "string") {
+                    router.push(`/workspace/${workspaceId}`);
+                    handleClose(false);
+                } else {
+                    toast.error("Invalid workspace ID received");
+                    console.error("Invalid workspace ID:", workspaceId);
+                }
             },
         });
-    };
+    }; 
 
     return (
         <Dialog open={open} onOpenChange={handleClose}>
@@ -56,7 +61,7 @@ export const CreateWorkspaceModal = () => {
                         required
                         autoFocus
                         minLength={3}
-                        placeholder="Workspace name e.g. 'Work', 'Personal', 'Home'"
+                        placeholder="workspace name e.g. 'Work', 'Personal', 'Home'"
                     />
                     <div className="flex justify-end">
                         <Button type="submit" disabled={isPending}>
